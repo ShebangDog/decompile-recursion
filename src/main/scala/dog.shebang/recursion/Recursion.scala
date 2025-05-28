@@ -1,11 +1,11 @@
 package dog.shebang.recursion
 
 import scala.annotation.tailrec
-import scala.util.control.TailCalls
-import scala.util.control.TailCalls.TailRec
 import scala.util.Try
 import scala.util.Failure
 import scala.util.Success
+import dog.shebang.tailrec.TailCalls
+import dog.shebang.tailrec.TailCalls.TailRec
 
 object Recursion:
     def recursion(value: Int): Int = Try[Int] {
@@ -14,6 +14,18 @@ object Recursion:
     }.getOrElse { 1 }
     
     end recursion
+
+    def tarai(x: Int, y: Int, z: Int, cont: Int => Int): Int =
+        if x <= y then cont(y)
+        else tarai(x - 1, y, z, first => 
+                tarai(y -  1, z, x, second =>
+                    tarai(z - 1, x, y, third => 
+                        tarai(first, second, third, cont)
+                    )
+                )
+        )
+        end if
+    end tarai
 
     def tailrecursion(value: Int, result: Int = 0): Int =
         if value == 0 then result
