@@ -1,6 +1,6 @@
 val scala3Version = "3.4.1"
 
-val fernflowerVersion = "dbf407a655"
+val fernflowerVersion = "61974b28d5"
 val fernflowerPackageName = "fernflower"
 
 val decompile = taskKey[Unit]("decompile")
