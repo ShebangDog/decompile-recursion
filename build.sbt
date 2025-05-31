@@ -6,6 +6,7 @@ val fernflowerPackageName = "fernflower"
 val decompile = taskKey[Unit]("decompile")
 
 import scala.sys.process.Process
+import sbt.io.IO
 lazy val root = project
   .in(file("."))
   .settings(
@@ -40,7 +41,10 @@ lazy val root = project
 
       maybeProcessBuilder match {
         case None => println("Error: Unable to find the required JAR file.")
-        case Some(builder) => builder.!
+        case Some(builder) => {
+          IO.createDirectory(baseDirectory.value / "decompiled")
+          builder.!
+        }
       }
     }
   )
